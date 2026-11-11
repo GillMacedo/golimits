@@ -1,0 +1,11 @@
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+deployment:
+  goMemLimitPercentage: 0
+env:
+  - name: GOMEMLIMIT
+    value: 512Mi
+  - name: GOGC
+    value: "50%"

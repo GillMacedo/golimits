@@ -1,0 +1,13 @@
+mode: daemonset
+image:
+  repository: otel/opentelemetry-collector-k8s
+useGOMEMLIMIT: false
+resources:
+  limits:
+    memory: 1Gi
+extraEnvs:
+  - name: GOMEMLIMIT
+    valueFrom:
+      resourceFieldRef:
+        resource: limits.memory
+        divisor: 1Mi

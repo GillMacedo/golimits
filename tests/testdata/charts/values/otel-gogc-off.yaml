@@ -1,0 +1,10 @@
+mode: deployment
+image:
+  repository: otel/opentelemetry-collector-k8s
+useGOMEMLIMIT: false
+resources:
+  limits:
+    memory: 2Gi
+extraEnvs:
+  - name: GOGC
+    value: "off"

@@ -1,0 +1,13 @@
+{
+  "name": "golimits",
+  "version": "0.1.0",
+  "description": "Check GOMEMLIMIT, GOGC and GOMAXPROCS in rendered Kubernetes manifests against each container's limits: values the Go runtime rejects at startup or silently ignores, GOMEMLIMIT with no headroom, wrong resourceFieldRef divisors and GOGC=off with no memory limit.",
+  "author": {
+    "name": "Giulliano Macedo",
+    "url": "https://github.com/GillMacedo"
+  },
+  "homepage": "https://github.com/GillMacedo/golimits",
+  "repository": "https://github.com/GillMacedo/golimits",
+  "license": "MIT",
+  "keywords": ["go", "golang", "kubernetes", "helm", "gomemlimit", "gomaxprocs", "gogc", "oomkilled", "ci"]
+}

@@ -1,0 +1,103 @@
+# Rendered manifests for a made-up "shop" app, with mistakes people make
+# when they copy Kubernetes quantities into Go runtime variables.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-runtime
+  namespace: shop
+data:
+  GOGC: "200%"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: shop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: registry.example.com/shop/api:1.4.0
+        env:
+        - name: GOMEMLIMIT
+          value: 900Mi
+        - name: GOGC
+          valueFrom:
+            configMapKeyRef:
+              name: go-runtime
+              key: GOGC
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: registry.example.com/shop/worker:1.4.0
+        env:
+        - name: GOGC
+          value: "off"
+        - name: GOMAXPROCS
+          value: "8"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 2Gi
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-agent
+  namespace: shop
+spec:
+  selector:
+    matchLabels:
+      app: log-agent
+  template:
+    metadata:
+      labels:
+        app: log-agent
+    spec:
+      containers:
+      - name: agent
+        image: registry.example.com/shop/log-agent:0.9.2
+        env:
+        - name: GOMEMLIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.memory
+              divisor: 1Mi
+        resources:
+          limits:
+            memory: 256Mi
+      - name: reloader
+        image: registry.example.com/shop/reloader:2.1.0
+        resources:
+          limits:
+            memory: 64Mi
+      terminationGracePeriodSeconds: 10

@@ -1,0 +1,17 @@
+bom.yaml gomemlimit-tiny
+crlf.yaml refused
+e1.yaml not-checked
+m1.yaml
+m2.yaml gomemlimit-tiny
+m3.yaml gogc-off-no-limit
+m4.yaml gomemlimit-tiny
+t1.yaml gomemlimit-tiny
+t2.yaml gogc-off-no-limit gomemlimit-above-limit
+t2b.yaml gogc-off-no-limit gomemlimit-above-limit
+t3.yaml gogc-off-no-limit no-memory-limit
+t4.yaml gomemlimit-tiny
+t5.yaml not-checked
+t6.yaml
+t7b.yaml refused
+t8.yaml refused
+t9.yaml refused

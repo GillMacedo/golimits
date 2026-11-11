@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p
+spec:
+  containers:
+  - name: app
+    image: x
+    resources:
+      limits:
+        memory: 1Gi
+    env:
+    - name: GOMEMLIMIT
+      value: "900MiB"

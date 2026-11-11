@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p
+spec:
+  containers:
+  - name: app
+    image: x
+    env:
+    - name: GOGC
+      value: "100"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: r
+spec:
+  template:
+    metadata:
+      labels:
+        app: r

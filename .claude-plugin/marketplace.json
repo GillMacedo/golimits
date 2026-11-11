@@ -1,0 +1,14 @@
+{
+  "name": "golimits-marketplace",
+  "description": "Marketplace for golimits, which checks Go runtime settings in Kubernetes manifests against container limits.",
+  "owner": {
+    "name": "Giulliano Macedo"
+  },
+  "plugins": [
+    {
+      "name": "golimits",
+      "source": "./plugin",
+      "description": "Find GOMEMLIMIT, GOGC and GOMAXPROCS values in Kubernetes manifests that crash Go at startup, are silently ignored, or don't fit the container's limits."
+    }
+  ]
+}

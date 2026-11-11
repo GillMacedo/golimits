@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p
+spec:
+  containers:
+  - &base
+    name: init
+    image: x
+    resources:
+      limits:
+        memory: 1Gi
+    env:
+    - name: GOMEMLIMIT
+      value: "900MiB"
+  - <<: *base
+    name: app
+    env:
+    - name: GOGC
+      value: "off"
+---
